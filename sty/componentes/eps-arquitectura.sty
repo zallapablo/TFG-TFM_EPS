@@ -159,7 +159,9 @@
   \subsection*{#1}
   % Suspender tagging PDF/UA-2 para evitar artefactos con longtable+multicolumn
   % Guard: solo si tagpdf está cargado (LaTeX 2024+ o con DocumentMetadata)
-  \IfPackageLoadedTF{tagpdf}{\SuspendTagging{presupuesto-longtable}}{}%
+  \ifcsname SuspendTagging\endcsname
+    \SuspendTagging{presupuesto-longtable}%
+  \fi
   % Columnas con ancho fijo para asegurar alineación correcta y evitar desborde
   % p{1.5cm}: Código
   % p{desc}: Descripción (calculada)
@@ -180,7 +182,9 @@
     \endlastfoot
 }{%
   \end{longtable}
-  \IfPackageLoadedTF{tagpdf}{\ResumeTagging{presupuesto-longtable}}{}%
+  \ifcsname ResumeTagging\endcsname
+    \ResumeTagging{presupuesto-longtable}%
+  \fi
   \endgroup
 }
 
